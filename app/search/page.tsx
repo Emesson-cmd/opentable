@@ -1,11 +1,14 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
 export default function Search() {
   return (
     <main>
       <main className="max-w-screen-2xl m-auto bg-white">
         <nav className="bg-white p-2 flex justify-between">
-          <a href="" className="font-bold text-gray-700 text-2xl">
+          <Link href="/" className="font-bold text-gray-700 text-2xl">
             OpenTable
-          </a>
+          </Link>
           <div>
             <div className="flex">
               <button className="bg-blue-400 text-white border p-2 px-4 rounded mr-3">
@@ -23,7 +26,7 @@ export default function Search() {
               type="text"
               placeholder="State, city or town"
             />
-            <button className="bg-red-600 px-9 py-2 text-white rounded">Let's go</button>
+            <button className="bg-red-600 px-9 py-2 text-white rounded">Let`s go</button>
           </div>
         </div>
 
@@ -63,10 +66,12 @@ export default function Search() {
 
           <div className="w-5/6">
             <div className="border-b flex pb-5">
-              <img
+              <Image
                 src="https://picsum.photos/id/870/536/354?grayscale&blur=2"
                 alt=""
                 className="w-44 rounded"
+                width={100}
+                height={100}
               />
               <div className="pl-5">
                 <h2 className="text-3xl">Restaurant name</h2>

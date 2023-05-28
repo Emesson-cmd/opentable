@@ -1,11 +1,14 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
 export default function RestaurantDetails() {
   return (
     <main>
       <main className="max-w-screen-2xl m-auto bg-white">
         <nav className="bg-white p-2 flex justify-between">
-          <a href="" className="font-bold text-gray-700 text-2xl">
+          <Link href="/" className="font-bold text-gray-700 text-2xl">
             OpenTable
-          </a>
+          </Link>
           <div>
             <div className="flex">
               <button className="bg-blue-400 text-white border p-2 px-4 rounded mr-3">
@@ -27,12 +30,12 @@ export default function RestaurantDetails() {
         <div className="flex m-auto w-2/3 justify-between items-start 0 -mt-11">
           <div className="bg-white w-[70%] rounded p-3 shadow">
             <nav className="flex text-reg border-b pb-2">
-              <a href="" className="mr-7">
+              <Link href="/restaurant/milestone-grill" className="mr-7">
                 Overview
-              </a>
-              <a href="" className="mr-7">
+              </Link>
+              <Link href="/restaurant/milestone-grill/menu" className="mr-7">
                 Menu
-              </a>
+              </Link>
             </nav>
 
             <div className="mt-4 border-b pb-6">
@@ -53,35 +56,49 @@ export default function RestaurantDetails() {
             <div className="mt-4">
               <p className="text-lg font-light">
                 The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those
-                interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by
-                Cicero are also reproduced in their exact original form, accompanied by English
-                versions from the 1914 translation by H. Rackham.
+                interested. Sections 1.10.32 and 1.10.33 from {'"'}de Finibus Bonorum et Malorum
+                {'"'} by Cicero are also reproduced in their exact original form, accompanied by
+                English versions from the 1914 translation by H. Rackham.
               </p>
             </div>
 
             <div>
               <h1 className="font-bold text-3xl mt-10 mb-7 border-b pb-5">7 photos</h1>
               <div className="flex flex-wrap">
-                <img className="w-56 h-44 mr-1 mb-1" src="https://picsum.photos/536/354" alt="" />
-                <img
+                <Image
+                  className="w-56 h-44 mr-1 mb-1"
+                  src="https://picsum.photos/536/354"
+                  alt=""
+                  width={100}
+                  height={100}
+                />
+                <Image
                   className="w-56 h-44 mr-1 mb-1"
                   src="https://picsum.photos/id/237/536/354"
                   alt=""
+                  width={100}
+                  height={100}
                 />
-                <img
+                <Image
                   className="w-56 h-44 mr-1 mb-1"
                   src="https://picsum.photos/seed/picsum/200/300"
                   alt=""
+                  width={100}
+                  height={100}
                 />
-                <img
+                <Image
                   className="w-56 h-44 mr-1 mb-1"
                   src="https://picsum.photos/id/1084/536/354?grayscale"
                   alt=""
+                  width={100}
+                  height={100}
                 />
-                <img
+                <Image
                   className="w-56 h-44 mr-1 mb-1"
                   src="https://picsum.photos/id/1060/536/354?blur=2"
                   alt=""
+                  width={100}
+                  height={100}
                 />
               </div>
             </div>
