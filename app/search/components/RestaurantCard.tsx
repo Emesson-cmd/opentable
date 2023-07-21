@@ -1,18 +1,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { RestaurantProps } from '../page';
 
-export default function RestaurantCard() {
+export default function RestaurantCard({restaurant}: {restaurant: RestaurantProps}) {
   return (
       <div className="border-b flex pb-5">
         <Image
-          src="https://picsum.photos/id/870/536/354?grayscale&blur=2"
+          src={restaurant.main_image}
           alt=""
           className="w-44 rounded"
           width={100}
           height={100}
         />
         <div className="pl-5">
-          <h2 className="text-3xl">Restaurant name</h2>
+          <h2 className="text-3xl">{restaurant.name}</h2>
           <div className="flex items-start">
             <div className="flex mb-2">*****</div>
             <p className="ml-2 text-sm">Awsome</p>
@@ -21,8 +22,8 @@ export default function RestaurantCard() {
           <div className="mb-9">
             <div className="font-light flex text-reg">
               <p className="mr-4">$$$</p>
-              <p className="mr-4">Mexican</p>
-              <p className="mr-4">Ottawa</p>
+              <p className="mr-4">{restaurant.cuisine.name}</p>
+              <p className="mr-4">{restaurant.location.name}</p>
             </div>
           </div>
 
