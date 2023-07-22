@@ -20,5 +20,5 @@ export default function Price({ price }: { price: PRICE }) {
     }
   };
 
-  return <p className="flex mr-3 font-extrabold">{renderPrice()}</p>;
+  return <p className="flex mr-3">{renderPrice()}</p>;
 }

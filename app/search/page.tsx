@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import SearchSideBar from './components/SearchSideBar';
 import RestaurantCard from './components/RestaurantCard';
-import { Cuisine, Location, PRICE, PrismaClient, Prisma } from '@prisma/client';
+import { Cuisine, Location, PRICE, PrismaClient, Prisma, Review } from '@prisma/client';
 
 export interface RestaurantProps {
   id: number;
@@ -10,6 +10,7 @@ export interface RestaurantProps {
   cuisine: Cuisine;
   location: Location;
   price: PRICE;
+  reviews: Review[]
 }
 
 interface SerachParams {
@@ -52,6 +53,7 @@ const fetchRestaurantsByCity = ({city, cuisine, price}: SerachParams): Promise<R
     cuisine: true,
     location: true,
     price: true,
+    reviews: true
   };
 
   return prisma.restaurant.findMany({
@@ -69,8 +71,6 @@ const fetchCuisines = () => {
 };
 
 export default async function Search({ searchParams }: { searchParams: SerachParams }) {
-  const { city, cuisine, price } = searchParams;
-
   const restaurants = await fetchRestaurantsByCity(searchParams);
   const locations = await fetchLocations();
   const cuisines = await fetchCuisines();
