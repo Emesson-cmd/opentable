@@ -2,6 +2,7 @@ import Header from '../components/Header';
 import RestaurantNavBar from '../components/RestaurantnavBar';
 import Menu from '../components/Menu';
 import { PrismaClient } from '@prisma/client';
+import { notFound } from 'next/navigation';
 
 const prisma = new PrismaClient();
 
@@ -13,7 +14,7 @@ const fetchRestaurantMenu = async (slug: string) => {
     },
   });
 
-  if (!restaurant) throw new Error("Cannot find restaurant");
+  if (!restaurant) notFound();
 
   return restaurant.items
 };

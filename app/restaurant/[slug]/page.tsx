@@ -8,6 +8,7 @@ import Reviews from './components/Reviews';
 import ReservationCard from './components/ReservationCard';
 import { PrismaClient, Review } from '@prisma/client';
 import { getAvaregeRating } from '../../../utils/calculateReviewRatingAvarage';
+import { notFound } from 'next/navigation';
 
 const prisma = new PrismaClient();
 
@@ -17,7 +18,7 @@ interface Restaurant {
   images: string[];
   description: string;
   slug: string;
-  reviews: Review[]
+  reviews: Review[];
 }
 
 const fetchRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
@@ -31,18 +32,18 @@ const fetchRestaurantBySlug = async (slug: string): Promise<Restaurant> => {
       images: true,
       description: true,
       slug: true,
-      reviews: true
+      reviews: true,
     },
   });
 
-  if (!restaurant) throw new Error("Cannot find restaurant");
+  if (!restaurant) notFound();
 
   return restaurant;
 };
 
 export default async function RestaurantDetails({ params }: { params: { slug: string } }) {
   const restaurant = await fetchRestaurantBySlug(params.slug);
-  
+
   return (
     <>
       <div className="bg-white w-[70%] rounded p-3 shadow">
