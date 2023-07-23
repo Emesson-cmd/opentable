@@ -13,14 +13,13 @@ const fetchRestaurantMenu = async (slug: string) => {
     },
   });
 
-  if (!restaurant) throw new Error();
+  if (!restaurant) throw new Error("Cannot find restaurant");
 
   return restaurant.items
 };
 
 export default async function RestaurantMenu({ params }: { params: { slug: string } }) {
   const menu = await fetchRestaurantMenu(params.slug)
-  console.log("🚀 ~ file: page.tsx:23 ~ RestaurantMenu ~ menu:", menu)
   
   return (
     <div className="bg-white w-[100%] rounded p-3 shadow">
