@@ -40,7 +40,7 @@ export default function RestaurantCard({ restaurant }: { restaurant: RestaurantP
         </div>
 
         <div className="text-red-600">
-          <Link href="/restaurant/milestone">View more information</Link>
+          <Link href={`/restaurant/${restaurant.slug}`}>View more information</Link>
         </div>
       </div>
     </div>

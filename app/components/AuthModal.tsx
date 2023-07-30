@@ -64,7 +64,7 @@ export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
 
           <div className="m-auto">
             <h2 className="text-2xl font-light text-center">
-              <p className="text-sm">
+              <p className="text-lg">
                 {renderContent('Log Into Your Account', 'Create Your Open Table Account')}
               </p>
             </h2>

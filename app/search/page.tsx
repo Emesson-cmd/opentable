@@ -10,7 +10,8 @@ export interface RestaurantProps {
   cuisine: Cuisine;
   location: Location;
   price: PRICE;
-  reviews: Review[]
+  reviews: Review[];
+  slug: string;
 }
 
 interface SerachParams {
@@ -21,7 +22,11 @@ interface SerachParams {
 
 const prisma = new PrismaClient();
 
-const fetchRestaurantsByCity = ({city, cuisine, price}: SerachParams): Promise<RestaurantProps[]> => {
+const fetchRestaurantsByCity = ({
+  city,
+  cuisine,
+  price,
+}: SerachParams): Promise<RestaurantProps[]> => {
   const where: Prisma.RestaurantWhereInput = {};
 
   if (city) {
@@ -53,7 +58,8 @@ const fetchRestaurantsByCity = ({city, cuisine, price}: SerachParams): Promise<R
     cuisine: true,
     location: true,
     price: true,
-    reviews: true
+    reviews: true,
+    slug: true,
   };
 
   return prisma.restaurant.findMany({
