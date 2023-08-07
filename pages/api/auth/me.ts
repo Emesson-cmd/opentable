@@ -23,5 +23,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     },
   });
 
-  return res.json({ user });
+  if (!user) {
+    return res.status(401).json({ errorMessage: 'User not found!' });
+  }
+
+  return res.json({
+    id: user.id,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    email: user.email,
+    phone: user.phone,
+    city: user.city,
+  });
 }

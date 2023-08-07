@@ -21,10 +21,12 @@ const style = {
 };
 
 export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
-  const { error, loading } = useContext(AuthenticationContext);
+  const { error, loading, data } = useContext(AuthenticationContext);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => {setOpen(false) };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const [inputs, setInputs] = useState({
     firstName: '',
     lastName: '',
@@ -71,10 +73,8 @@ export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
 
   const handleClick = () => {
     if (isSignIn) {
-      console.log(inputs)
       signin({ email: inputs.email, password: inputs.password }, handleClose);
     } else {
-      console.log(inputs)
       signup(inputs, handleClose);
     }
   };

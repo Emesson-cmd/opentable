@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     setCookie('jwt', token, { req, res, maxAge: 60 * 6 * 24 });
 
     return res.status(200).json({
-      firsName: user.first_name,
+      firstName: user.first_name,
       lastName: user.last_name,
       email: user.email,
       phone: user.phone,
