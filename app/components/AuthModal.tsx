@@ -7,6 +7,7 @@ import AuthModalInputs from './AuthModalInputs';
 import useAuth from '../../hooks/useAuth';
 import { AuthenticationContext } from '../context/AuthContext';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Alert } from '@mui/material';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -120,6 +121,7 @@ export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
               )}
             </button>
           </div>
+          {error && <Alert severity="error">{error}</Alert>}
         </Box>
       </Modal>
     </div>
