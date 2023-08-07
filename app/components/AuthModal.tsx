@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import AuthModalInputs from './AuthModalInputs';
 import useAuth from '../../hooks/useAuth';
 import { AuthenticationContext } from '../context/AuthContext';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -23,6 +24,15 @@ export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [inputs, setInputs] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    city: '',
+    password: '',
+  });
+  const { signin } = useAuth({ email: inputs.email, password: inputs.password });
 
   const renderContent = (signInContent: string, signUpContent: string) => {
     return isSignIn ? signInContent : signUpContent;
@@ -34,17 +44,6 @@ export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
       [e.target.name]: e.target.value,
     });
   };
-
-  const [inputs, setInputs] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    city: '',
-    password: '',
-  });
-
-  const { signin } = useAuth({ email: inputs.email, password: inputs.password });
 
   const [disabled, setDisabled] = useState(true);
 
@@ -111,10 +110,14 @@ export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
 
             <button
               className="uppercase bg-red-600 w-full text-white p-3 rounded text-sm mb-5 disabled:bg-gray-400"
-              disabled={disabled}
+              disabled={disabled || loading}
               onClick={handleClick}
             >
-              {renderContent('Sign In', 'Create Account')}
+              {loading ? (
+                <CircularProgress size={16} color="inherit" />
+              ) : (
+                renderContent('Sign In', 'Create Account')
+              )}
             </button>
           </div>
         </Box>
