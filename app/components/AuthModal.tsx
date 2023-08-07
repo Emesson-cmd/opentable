@@ -33,7 +33,7 @@ export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
     city: '',
     password: '',
   });
-  const { signin } = useAuth({ email: inputs.email, password: inputs.password });
+  const { signin } = useAuth();
 
   const renderContent = (signInContent: string, signUpContent: string) => {
     return isSignIn ? signInContent : signUpContent;
@@ -71,7 +71,7 @@ export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
 
   const handleClick = () => {
     if (signin) {
-      signin();
+      signin({ email: inputs.email, password: inputs.password }, handleClose);
     }
   };
 

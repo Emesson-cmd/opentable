@@ -2,10 +2,13 @@ import axios from 'axios';
 import { useContext } from 'react';
 import { AuthenticationContext } from '../app/context/AuthContext';
 
-const useAuth = ({ email, password }: { email: string; password: string }) => {
+const useAuth = () => {
   const { data, error, loading, setAuthState } = useContext(AuthenticationContext);
 
-  const signin = async () => {
+  const signin = async (
+    { email, password }: { email: string; password: string },
+    handleClose?: () => void
+  ) => {
     setAuthState({
       data: null,
       error: null,
@@ -22,6 +25,7 @@ const useAuth = ({ email, password }: { email: string; password: string }) => {
         error: null,
         loading: false,
       });
+      handleClose && handleClose();
     } catch (error: any) {
       setAuthState({
         data: null,
