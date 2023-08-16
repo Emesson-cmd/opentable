@@ -1,21 +1,27 @@
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthenticationContext } from '../app/context/AuthContext';
-import { getCookie } from 'cookies-next';
+import { deleteCookie, getCookie, removeCookies } from 'cookies-next';
+
+type SigninProps = {
+  email: string;
+  password: string;
+  handleClose?: () => void;
+};
+
+type SignupProps = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  city: string;
+  phone: string;
+};
 
 const useAuth = () => {
-  const { data, error, loading, setAuthState } = useContext(AuthenticationContext);
+  const { setAuthState } = useContext(AuthenticationContext);
 
-  const signin = async (
-    {
-      email,
-      password,
-    }: {
-      email: string;
-      password: string;
-    },
-    handleClose?: () => void
-  ) => {
+  const signin = async ({ email, password }: SigninProps, handleClose?: () => void) => {
     setAuthState({
       data: null,
       error: null,
@@ -43,21 +49,7 @@ const useAuth = () => {
   };
 
   const signup = async (
-    {
-      email,
-      password,
-      firstName,
-      lastName,
-      city,
-      phone,
-    }: {
-      email: string;
-      password: string;
-      firstName: string;
-      lastName: string;
-      city: string;
-      phone: string;
-    },
+    { email, password, firstName, lastName, city, phone }: SignupProps,
     handleClose?: () => void
   ) => {
     setAuthState({
@@ -90,9 +82,20 @@ const useAuth = () => {
     }
   };
 
+  const signout = () => {
+    deleteCookie('jwt');
+
+    setAuthState({
+      data: null,
+      error: null,
+      loading: false,
+    });
+  };
+
   return {
     signin,
     signup,
+    signout
   };
 };
 
