@@ -83,7 +83,7 @@ export default function AuthModal({ isSignIn }: { isSignIn: boolean }) {
     <div>
       <button
         onClick={handleOpen}
-        className={`${renderContent('bg-blue-400 text-white', '')}  border p-2 px-4 rounded mr-3`}
+        className={`${renderContent('bg-blue-400 text-white', '')}  border p-1 px-4 rounded mr-3`}
       >
         {renderContent('Sign In', 'Sign Up')}
       </button>
