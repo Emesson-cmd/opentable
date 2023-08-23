@@ -1,6 +1,45 @@
-"use client";
+'use client';
 
-export default function ReservationCard() {
+import { partySize, convertToDisplayTime, displayTimeObject, displayTimeArray, Time } from '@/data';
+import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+
+type ReservationCardProps = {
+  openTime: string;
+  closeTime: string;
+};
+
+export default function ReservationCard({ closeTime, openTime }: ReservationCardProps) {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+
+  const handleChangeDate = (date: Date | null) => {
+    if (date) {
+      return setSelectedDate(date);
+    }
+    return setSelectedDate(null);
+  };
+
+  const filterTimeByRestaurantOpenWindow = () => {
+    const timeWithInWindow: typeof displayTimeArray = [];
+
+    let isWithinWindow = false;
+
+    displayTimeArray.forEach((time) => {
+      if (time.value === openTime) {
+        isWithinWindow = true;
+      }
+      if (isWithinWindow) {
+        isWithinWindow = true;
+        timeWithInWindow.push(time);
+      }
+      if (time.value === closeTime) {
+        isWithinWindow = false;
+      }
+    });
+
+    return timeWithInWindow;
+  };
+
   return (
     <div className="fixed w-[15%] bg-white rounded p-3 shadow">
       <div className="text-center border-b pb-2 font-bold">
@@ -10,22 +49,34 @@ export default function ReservationCard() {
       <div className="my-3 flex flex-col">
         <label htmlFor="">Party Size</label>
         <select name="" id="" className="py-3 border-b font-light">
-          <option value="">1 person</option>
-          <option value="">2 person</option>
+          {partySize.map((size) => (
+            <option key={size.value} value={size.value}>
+              {size.label}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="flex justify-between">
         <div className="flex flex-col w-[48%]">
           <label htmlFor="">Date</label>
-          <input type="text" className="py-3 border-b front-light w-28" />
+          <DatePicker
+            selected={selectedDate}
+            onChange={handleChangeDate}
+            className="py-3 border font-light text-reg w-20"
+            dateFormat="MMM d"
+            wrapperClassName="w-[48%]"
+          />
         </div>
 
         <div className="flex flex-col w-[48%]">
           <label htmlFor="">Time</label>
-          <select name="" id="" className="py-3 border-b font-light ">
-            <option value="">7:30 AM</option>
-            <option value="">9:30 AM</option>
+          <select name="" id="" className="py-3 border-b font-light">
+            {filterTimeByRestaurantOpenWindow().map((time) => (
+              <option key={time.value} value={time.value}>
+                {time.label}
+              </option>
+            ))}
           </select>
         </div>
       </div>
