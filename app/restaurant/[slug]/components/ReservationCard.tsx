@@ -1,6 +1,13 @@
 'use client';
 
-import { partySize, convertToDisplayTime, displayTimeObject, displayTimeArray, Time } from '@/data';
+import {
+  partySize,
+  convertToDisplayTime,
+  displayTimeObject,
+  displayTimeArray,
+  Time,
+  generateTimeArray,
+} from '@/data';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 
@@ -19,6 +26,7 @@ export default function ReservationCard({ closeTime, openTime }: ReservationCard
     return setSelectedDate(null);
   };
 
+  // Fills the restaurant time window according to its opening and closing time
   const filterTimeByRestaurantOpenWindow = () => {
     const timeWithInWindow: typeof displayTimeArray = [];
 

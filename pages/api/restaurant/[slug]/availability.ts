@@ -1,3 +1,4 @@
+import { displayTimeArray, displayTimeObject, generateTimeArray, timeAndSearch } from '@/data';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
@@ -13,6 +14,17 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
       errorMessage: 'Invalid data provided',
     });
   }
-  
-  return res.json({ slug, day, time, partySize });
+
+  const searchTimes = timeAndSearch.find((t) => {
+    return t.time === time;
+  })?.searchTimes;
+
+  if (!searchTimes) {
+    return res.status(400).json({
+      errorMessage: 'Invalid data provided',
+    });
+  }
+
+  return res.json({ slug, day, time, partySize, searchTimes });
+
 }
