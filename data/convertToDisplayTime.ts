@@ -244,65 +244,6 @@ export const displayTimeArray = [
   }
 ]
 
-export function generateTimeArray(baseTime: string): { time: string; value: string }[] {
-  const timeArray: { time: string; value: string }[] = [];
-
-  const baseDate = new Date(baseTime);
-
-  // 1 hour before
-  const oneHourBefore = new Date(baseDate.getTime() - 60 * 60 * 1000);
-  console.log("oneHourBefore ===================>", baseTime)
-  timeArray.push({
-    time: oneHourBefore.toISOString(),
-    value: oneHourBefore.toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    }),
-  });
-
-  // 30 minutes before
-  const thirtyMinutesBefore = new Date(baseDate.getTime() - 30 * 60 * 1000);
-  timeArray.push({
-    time: thirtyMinutesBefore.toISOString(),
-    value: thirtyMinutesBefore.toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    }),
-  });
-
-  // Exactly the same time
-  timeArray.push({
-    time: baseDate.toISOString(),
-    value: baseDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }),
-  });
-
-  // 30 minutes after
-  const thirtyMinutesAfter = new Date(baseDate.getTime() + 30 * 60 * 1000);
-  timeArray.push({
-    time: thirtyMinutesAfter.toISOString(),
-    value: thirtyMinutesAfter.toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    }),
-  });
-
-  // 1 hour after
-  const oneHourAfter = new Date(baseDate.getTime() + 60 * 60 * 1000);
-  timeArray.push({
-    time: oneHourAfter.toISOString(),
-    value: oneHourAfter.toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    }),
-  });
-
-  return timeArray;
-}
-
 export type Time = keyof typeof displayTimeObject;
 
 export const convertToDisplayTime = (time: Time) => {

@@ -29,7 +29,6 @@ export default function ReservationCard({ closeTime, openTime, slug }: Reservati
   };
 
   const handleClick = () => {
-    console.log({ day });
     fetchAvailabilities({
       slug,
       day,
