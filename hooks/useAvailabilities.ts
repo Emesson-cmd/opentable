@@ -8,19 +8,17 @@ type AvailabilitiesProps = {
   time: string;
 };
 
+type DataProps = {
+  time: string;
+  available: boolean;
+};
+
 export default function useAvailabilities() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<DataProps[] | null>(null);
 
   const fetchAvailabilities = async ({ slug, partySize, day, time }: AvailabilitiesProps) => {
-    console.log({
-      slug,
-      partySize,
-      day,
-      time,
-    });
-    return;
     setLoading(true);
 
     try {

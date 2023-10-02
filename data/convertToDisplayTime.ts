@@ -244,12 +244,6 @@ export const displayTimeArray = [
   }
 ]
 
-// export const displayTimeArray = Object.entries(displayTimeObject).map(([value, label]) => ({
-//   label,
-//   value,
-// }));
-// console.log("🚀 ~ file: convertToDisplayTime.ts:56 ~ displayTimeArray ~ displayTimeArray:", displayTimeArray)
-
 export function generateTimeArray(baseTime: string): { time: string; value: string }[] {
   const timeArray: { time: string; value: string }[] = [];
 
